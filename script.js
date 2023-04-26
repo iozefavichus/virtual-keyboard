@@ -79,7 +79,7 @@ const Keyboard = {
         const keyLayout = [
             "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","+", "backspace",
             "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
-            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift",
+            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift_right",
             "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
             "command" ,"space", "command", "option"
         ];
@@ -89,7 +89,7 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
+            const insertLineBreak = ["backspace", "enter",, "shift_right", "?"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -108,12 +108,12 @@ const Keyboard = {
                     break;
 
                 case "caps":
-                    keyElement.classList.add("btn__wide", "keyboard__key--activatable");
-                    // keyElement.innerHTML = createIconHTML("keyboard_capslock");
+                    keyElement.classList.add("btn__wide", "btn--activatable");
+                    keyElement.innerHTML = createIconHTML("capslock");
 
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
-                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                        keyElement.classList.toggle("btn--active", this.properties.capsLock);
                     });
 
                     break;
@@ -141,6 +141,17 @@ const Keyboard = {
                     break;
 
                 case "shift":
+                    keyElement.classList.add("btn__wide");
+                    keyElement.innerHTML = createIconHTML("shift");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "shift_right":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("shift");
 
