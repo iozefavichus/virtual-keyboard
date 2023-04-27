@@ -60,8 +60,8 @@ const Keyboard = {
             "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","+", "backspace",
             "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift_right",
-            "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-            "command" ,"space", "command", "option"
+            "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
+            "option", "command" ,"space", "command_right", "option_right"
         ];
         const createIconHTML = (icon_name) => {
             return `<i class="material-icons">${icon_name}</i>`;
@@ -69,7 +69,7 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "enter",, "shift_right", "?"].indexOf(key) !== -1;
+            const insertLineBreak = ["backspace", "enter",, "shift_right", "/"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -78,8 +78,11 @@ const Keyboard = {
             keyElement.classList.add(`Key${keyUp}`);
 
             switch (key) {
+
                 case "backspace":
                     keyElement.classList.add("btn__wide");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`Backspace`);
                     keyElement.innerHTML = createIconHTML("backspace");
 
                     keyElement.addEventListener("click", () => {
@@ -92,6 +95,8 @@ const Keyboard = {
                 case "caps":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("capslock");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`CapsLock`);
 
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
@@ -103,6 +108,8 @@ const Keyboard = {
                 case "enter":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("enter");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`Enter`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -114,6 +121,8 @@ const Keyboard = {
                 case "tab":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("tab");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`Tab`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -125,6 +134,8 @@ const Keyboard = {
                 case "shift":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("shift");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ShiftLeft`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -136,6 +147,8 @@ const Keyboard = {
                 case "shift_right":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("shift");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ShiftRight`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -147,6 +160,21 @@ const Keyboard = {
                 case "command":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("command");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`MetaLeft`);
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "command_right":
+                    keyElement.classList.add("btn__wide");
+                    keyElement.innerHTML = createIconHTML("command");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`MetaRight`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -158,6 +186,8 @@ const Keyboard = {
                 case "option":
                     keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("option");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`AltLeft`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -166,9 +196,24 @@ const Keyboard = {
 
                     break;
 
+                    case "option_right":
+                        keyElement.classList.add("btn__wide");
+                        keyElement.innerHTML = createIconHTML("option");
+                        keyElement.classList.remove(`Key${keyUp}`);
+                        keyElement.classList.add(`AltRight`);
+
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value += "\n";
+                            this._triggerEvent("oninput");
+                        });
+
+                        break;
+
                 case "space":
                     keyElement.classList.add("btn__extrawide");
                     keyElement.innerHTML = createIconHTML("space");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`Space`);
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += " ";
@@ -227,7 +272,6 @@ window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
 });
 
-// console.log(document.querySelector(`.wrapper`));
 
 document.onkeydown = function (event){
     let count = event.code;
