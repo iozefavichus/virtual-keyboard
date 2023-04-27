@@ -7,30 +7,10 @@ WRAPPER.className = "wrapper";
 document.body.prepend(WRAPPER);
 
 let TEXTFIELD = document.createElement("textarea");
-TEXTFIELD.className = "text-field";
+TEXTFIELD.className = "text-field use-keyboard-input";
+TEXTFIELD.setAttribute("autofocus","autofocus");
 
 WRAPPER.appendChild(TEXTFIELD);
-
-// let KEYBOARD = document.createElement("div");
-// KEYBOARD.className = "keyboard";
-
-// WRAPPER.appendChild(KEYBOARD);
-
-// let BUT = document.createElement("div");
-
-// class Button {
-
-//     constructor(name) {
-//       this.name = name;
-//       this.className = "btn";
-//     }
-
-//   }
-
-// let A = new Button("A");
-// let B = new Button("B");
-
-// KEYBOARD.appendChild(BUT);
 
 
 const Keyboard = {
@@ -63,7 +43,7 @@ const Keyboard = {
         this.elements.keys = this.elements.keysContainer.querySelectorAll("btn");
 
         this.elements.main.appendChild(this.elements.keysContainer);
-        document.body.appendChild(this.elements.main);
+        WRAPPER.appendChild(this.elements.main);
 
         document.querySelectorAll(".use-keyboard-input").forEach(element => {
                     element.addEventListener("focus", () => {
@@ -108,7 +88,7 @@ const Keyboard = {
                     break;
 
                 case "caps":
-                    keyElement.classList.add("btn__wide", "btn--activatable");
+                    keyElement.classList.add("btn__wide");
                     keyElement.innerHTML = createIconHTML("capslock");
 
                     keyElement.addEventListener("click", () => {
@@ -232,7 +212,11 @@ const Keyboard = {
         }
     },
 
-
+    open(initialValue, oninput, onclose) {
+        this.properties.value = initialValue || "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+    },
 
 };
 
