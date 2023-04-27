@@ -74,6 +74,8 @@ const Keyboard = {
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("btn");
+            let keyUp = key.toUpperCase();
+            keyElement.classList.add(`Key${keyUp}`);
 
             switch (key) {
                 case "backspace":
@@ -224,4 +226,15 @@ const Keyboard = {
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
 });
+
+// console.log(document.querySelector(`.wrapper`));
+
+document.onkeydown = function (event){
+    let count = event.code;
+    console.log(count);
+    document.querySelectorAll('.btn').forEach(function(element){
+        element.classList.remove('active');
+    })
+    document.querySelector(`.${count}`).classList.add('active');
+}
 
