@@ -58,7 +58,7 @@
 }
 
 .btn__extrawide{
-  width: 36%;
+  width: 29%;
   max-width: 500px;
 }
 
@@ -68,4 +68,25 @@
 
 .active{
   background: rgba(191, 242, 80, 0.6);
+}
+
+.arrow{
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  margin-right: 6px;
+}
+
+.arrow__top{
+  transform: rotate(-45deg);
+}
+.arrow__bottom{
+  transform: rotate(135deg);
+}
+.arrow__left{
+  transform: rotate(-135deg);
+}
+.arrow__right{
+  transform: rotate(45deg);
 }

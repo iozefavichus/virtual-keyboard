@@ -13,6 +13,7 @@ TEXTFIELD.setAttribute("autofocus","autofocus");
 WRAPPER.appendChild(TEXTFIELD);
 
 
+
 const Keyboard = {
     elements: {
         main: null,
@@ -60,8 +61,8 @@ const Keyboard = {
             "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
             "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift_right",
-            "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
-            "option", "command" ,"space", "command_right", "option_right"
+            "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "arrow-up",
+            "option", "command" ,"space", "command_right", "option_right","arrow-left","arrow-down","arrow-right",
         ];
         const createIconHTML = (icon_name) => {
             return `<i class="material-icons">${icon_name}</i>`;
@@ -69,7 +70,7 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "enter",, "shift_right", "/"].indexOf(key) !== -1;
+            const insertLineBreak = ["backspace", "enter",, "shift_right", "arrow-up"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -122,6 +123,66 @@ const Keyboard = {
 
 
             switch (key) {
+                case "arrow-up":
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ArrowUp`);
+                    let SPAN_UP = document.createElement("span");
+                    SPAN_UP.classList.add("arrow");
+                    SPAN_UP.classList.add("arrow__top");
+                    keyElement.append(SPAN_UP);
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "arrow-left":
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ArrowLeft`);
+                    let SPAN_LEFT = document.createElement("span");
+                    SPAN_LEFT.classList.add("arrow");
+                    SPAN_LEFT.classList.add("arrow__left");
+                    keyElement.append(SPAN_LEFT);
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "arrow-down":
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ArrowDown`);
+                    let SPAN_DOWN = document.createElement("span");
+                    SPAN_DOWN.classList.add("arrow");
+                    SPAN_DOWN.classList.add("arrow__bottom");
+                    keyElement.append(SPAN_DOWN);
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "arrow-right":
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`ArrowRight`);
+                    let SPAN_RIGHT = document.createElement("span");
+                    SPAN_RIGHT.classList.add("arrow");
+                    SPAN_RIGHT.classList.add("arrow__right");
+                    keyElement.append(SPAN_RIGHT);
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
                 case "backspace":
                     keyElement.classList.add("btn__wide");
                     keyElement.classList.remove(`Key${keyUp}`);
