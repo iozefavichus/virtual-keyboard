@@ -57,7 +57,7 @@ const Keyboard = {
     _createKeys() {
         const fragment = document.createDocumentFragment();
         const keyLayout = [
-            "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","+", "backspace",
+            "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
             "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift_right",
             "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
@@ -77,8 +77,51 @@ const Keyboard = {
             let keyUp = key.toUpperCase();
             keyElement.classList.add(`Key${keyUp}`);
 
-            switch (key) {
+            if(key =="."){
+                keyElement.classList.add(`Period`);
+            }
+            if(key ==","){
+                keyElement.classList.add(`Comma`);
+            }
+            if(key =="/"){
+                keyElement.classList.add(`Slash`);
+            }
+            if(key =="|"){
+                keyElement.classList.add(`Backslash`);
+            }
+            if(key =="'"){
+                keyElement.classList.add(`Quote`);
+            }
+            if(key ==";"){
+                keyElement.classList.add(`Semicolon`);
+            }
+            if(key =="]"){
+                keyElement.classList.add(`BracketRight`);
+            }
+            if(key =="["){
+                keyElement.classList.add(`BracketLeft`);
+            }
+            if(key =="`"){
+                keyElement.classList.add(`IntlBackslash`);
+            }
+            if(key =="-"){
+                keyElement.classList.add(`Minus`);
+            }
+            if(key =="="){
+                keyElement.classList.add(`Equal`);
+            }
+            if(key =="§"){
+                keyElement.classList.add(`Backquote`);
+            }
 
+            let digits = ["1","2","3","4","5","6","7","8","9","0"];
+            if(digits.includes(key)){
+                keyElement.classList.remove(`Key${keyUp}`);
+                keyElement.classList.add(`Digit${key}`);
+            }
+
+
+            switch (key) {
                 case "backspace":
                     keyElement.classList.add("btn__wide");
                     keyElement.classList.remove(`Key${keyUp}`);
