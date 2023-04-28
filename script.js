@@ -396,10 +396,14 @@ window.addEventListener("DOMContentLoaded", function () {
 
 document.onkeydown = function (event){
     let count = event.code;
-    document.querySelectorAll('.btn').forEach(function(element){
-        element.classList.remove('active');
-    })
+    // document.querySelectorAll('.btn').forEach(function(element){
+    //     element.classList.remove('active');
+    // })
     document.querySelector(`.${count}`).classList.add('active');
+
+    setTimeout(() => {
+        document.querySelector(`.${count}`).classList.remove('active');
+      }, "150");
 }
 
 
