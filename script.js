@@ -46,6 +46,15 @@ const Keyboard = {
         this.elements.main.appendChild(this.elements.keysContainer);
         WRAPPER.appendChild(this.elements.main);
 
+        let TEXT = document.createElement("div");
+        TEXT.textContent = "Клавиатура создана в операционной системе MAC OS";
+        TEXT.classList.add("text__description");
+        let SECONDTEXT = document.createElement("div");
+        SECONDTEXT.textContent =  "Для переключения языка комбинация: левый control + space";
+        SECONDTEXT.classList.add("text__description");
+        WRAPPER.appendChild(TEXT);
+        WRAPPER.appendChild(SECONDTEXT);
+
         document.querySelectorAll(".use-keyboard-input").forEach(element => {
                     element.addEventListener("focus", () => {
                         this.open(element.value, currentValue => {
@@ -55,13 +64,21 @@ const Keyboard = {
                 });
         },
 
+
     _createKeys() {
         const fragment = document.createDocumentFragment();
         const keyLayout = [
             "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
-            "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
-            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l",";" ,"'","|", "shift_right",
-            "shift", "`", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "arrow-up",
+            "tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P","[", "]","enter",
+            "caps", "A", "S", "D", "F", "G", "H", "J", "K", "L",";" ,"'","|", "shift_right",
+            "shift", "`", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "arrow-up",
+            "option", "command" ,"space", "command_right", "option_right","arrow-left","arrow-down","arrow-right",
+        ];
+        const keyLayoutRus =[
+            "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
+            "tab", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З","[", "]","enter",
+            "caps", "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д",";" ,"'","|", "shift_right",
+            "shift", "`", "Я", "Ч", "С", "М", "И", "Т", "Ь", ",", ".", "/", "arrow-up",
             "option", "command" ,"space", "command_right", "option_right","arrow-left","arrow-down","arrow-right",
         ];
         const createIconHTML = (icon_name) => {
@@ -379,10 +396,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
 document.onkeydown = function (event){
     let count = event.code;
-    console.log(count);
     document.querySelectorAll('.btn').forEach(function(element){
         element.classList.remove('active');
     })
     document.querySelector(`.${count}`).classList.add('active');
 }
+
 
