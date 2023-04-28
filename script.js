@@ -12,8 +12,6 @@ TEXTFIELD.setAttribute("autofocus","autofocus");
 
 WRAPPER.appendChild(TEXTFIELD);
 
-
-
 const Keyboard = {
     elements: {
         main: null,
@@ -89,7 +87,6 @@ const Keyboard = {
             const keyElement = document.createElement("button");
             const insertLineBreak = ["backspace", "enter",, "shift_right", "arrow-up"].indexOf(key) !== -1;
 
-            // Add attributes/classes
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("btn");
             let keyUp = key.toUpperCase();
@@ -343,16 +340,31 @@ const Keyboard = {
 
                     break;
 
+
                 default:
                     keyElement.textContent = key.toLowerCase();
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        // console.log(this.properties.value);
                         this._triggerEvent("oninput");
                     });
 
                     break;
-            }
+                }
+
+
+                document.onkeydown = function (event){
+                    let count = event.code;
+                    document.querySelector(`.${count}`).classList.add('active');
+                    Keyboard.properties.value += event.key;
+                    setTimeout(() => {
+                        document.querySelector(`.${count}`).classList.remove('active');
+                      }, "150");
+                    // console.log(Keyboard.properties.value);
+                    Keyboard._triggerEvent("oninput");
+                }
+
 
             fragment.appendChild(keyElement);
 
@@ -360,6 +372,7 @@ const Keyboard = {
                 fragment.appendChild(document.createElement("br"));
             }
         });
+
 
         return fragment;
     },
@@ -393,17 +406,5 @@ window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
 });
 
-
-document.onkeydown = function (event){
-    let count = event.code;
-    // document.querySelectorAll('.btn').forEach(function(element){
-    //     element.classList.remove('active');
-    // })
-    document.querySelector(`.${count}`).classList.add('active');
-
-    setTimeout(() => {
-        document.querySelector(`.${count}`).classList.remove('active');
-      }, "150");
-}
 
 
