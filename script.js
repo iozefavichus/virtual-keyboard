@@ -22,7 +22,7 @@ const Keyboard = {
 
     eventHandlers: {
         oninput: null,
-        // onclose: null
+        onclose: null
     },
 
     properties: {
@@ -50,7 +50,7 @@ const Keyboard = {
         TEXT.textContent = "Клавиатура создана в операционной системе MAC OS";
         TEXT.classList.add("text__description");
         let SECONDTEXT = document.createElement("div");
-        SECONDTEXT.textContent =  "Для переключения языка комбинация: левый control + space";
+        SECONDTEXT.textContent =  "Для переключения языка комбинация кнопка lang";
         SECONDTEXT.classList.add("text__description");
         WRAPPER.appendChild(TEXT);
         WRAPPER.appendChild(SECONDTEXT);
@@ -73,20 +73,20 @@ const Keyboard = {
                 "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
                 "caps", "A", "S", "D", "F", "G", "H", "J", "K", "L",";" ,"'","|",
                 "shift", "`", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "arrow-up", "shift_right",
-                "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right",
+                "lang", "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right",
             ];
         }
         else if(Keyboard.properties.lang == "rus"){
             keyLayout=[
                 "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
-                "tab", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З","[", "]","enter",
-                "caps", "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д",";" ,"'","|",
-                "shift", "`", "Я", "Ч", "С", "М", "И", "Т", "Ь", ",", ".", "/", "arrow-up", "shift_right",
-                "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right",
+                "tab", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З","Х", "Ъ","enter",
+                "caps", "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д","Ж" ,"Э","Ё",
+                "shift", "`", "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "/", "arrow-up", "shift_right",
+                "lang", "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right",
             ];
         }
         const createIconHTML = (icon_name) => {
-            return `<i class="material-icons">${icon_name}</i>`;
+            return `<i>${icon_name}</i>`;
         };
 
         keyLayout.forEach(key => {
@@ -225,6 +225,18 @@ const Keyboard = {
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
                         keyElement.classList.toggle("btn--active", this.properties.capsLock);
+                    });
+
+                    break;
+
+                case "lang":
+                    keyElement.classList.add("btn__wide");
+                    keyElement.innerHTML = createIconHTML("lang");
+                    keyElement.classList.remove(`Key${keyUp}`);
+                    keyElement.classList.add(`language`);
+
+                    keyElement.addEventListener("click", () => {
+                        this._toggleLanguage();
                     });
 
                     break;
@@ -372,33 +384,9 @@ const Keyboard = {
                     }
                     console.log(Keyboard.properties.value);
                 }
-
-                //double press for changing language
-                //  function runOnKeys(func, ...codes) {
-                //     let pressed = new Set();
-                //     document.addEventListener('keydown', function(event) {
-                //       pressed.add(event.code);
-
-                //       for (let code of codes) { // все ли клавиши из набора нажаты?
-                //         if (!pressed.has(code)) {
-                //           return;
-                //         }
-                //       }
-                //       pressed.clear();
-
-                //       func();
-                //     });
-
-                //     document.addEventListener('keyup', function(event) {
-                //       pressed.delete(event.code);
-                //     });
-                //   }
-
-                //   runOnKeys(
-                //     () => this._toggleLanguage(),
-                //     "KeyX",
-                //     "KeyZ"
-                //   );
+                document.onkeyup = function(event){
+                    TEXTFIELD.focus();
+                }
 
 
             fragment.appendChild(keyElement);
@@ -420,13 +408,10 @@ const Keyboard = {
 
     _toggleCapsLock() {
         this.properties.capsLock = !this.properties.capsLock;
-        // console.log(this.properties.capsLock );
-        // console.log(this.elements.keys);
 
         for (const key of this.elements.keys) {
             if (key.childElementCount === 0) {
                 key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
-                // console.log(key.textContent);
             }
         }
     },
@@ -435,11 +420,41 @@ const Keyboard = {
         if(this.properties.lang == "eng"){
             this.properties.lang = "rus";
         }
-        if(this.properties.lang == "rus"){
+        else if(this.properties.lang == "rus"){
             this.properties.lang = "eng";
         }
-        console.log(this.properties.lang);
-    },
+
+    //     let KeysEng =[
+    //         "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
+    //     "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
+    //     "caps", "A", "S", "D", "F", "G", "H", "J", "K", "L",";" ,"'","|",
+    //     "shift", "`", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "arrow-up", "shift_right",
+    //     "lang", "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right",
+    // ];
+    //     let KeysRus=[
+    //         "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
+    //     "tab", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З","Х", "Ъ","enter",
+    //     "caps", "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д","Ж" ,"Э","Ё",
+    //     "shift", "`", "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "/", "arrow-up", "shift_right",
+    //     "lang", "control", "command" ,"space", "command_right", "arrow-left","arrow-down","arrow-right"
+    // ];
+
+    //     for (const key of this.elements.keys) {
+    //         if (key.childElementCount === 0) {
+    //             if(this.properties.lang == "eng"){
+    //                 for(let i=15; i<27;i++){
+    //                     key[i].textContent=KeysEng[i];
+    //                 }
+    //             }
+    //             else if(this.properties.lang == "rus"){
+    //                 console.log(key);
+    //                 key.textContent = KeysRus.textContent;
+
+
+    //         }
+    //     }
+    // }
+},
 
     open(initialValue, oninput, onclose) {
         this.properties.value = initialValue || "";
@@ -450,8 +465,13 @@ const Keyboard = {
 };
 
 
+function setFocus(){
+    document.querySelector(".text-field").focus();
+}
+
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
+    setFocus();
 });
 
 
