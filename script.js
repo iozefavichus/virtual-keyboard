@@ -596,6 +596,12 @@ const Keyboard = {
             console.log(this.properties.lang);
         }
 
+        // keyLayout.forEach(key => {
+        //     key.textContent = key.KeysRus.textContent;
+        //     }
+        // )
+
+
     //     let KeysEng =[
     //         "§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0","-","=", "backspace",
     //     "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","[", "]","enter",
