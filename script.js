@@ -222,7 +222,7 @@ const Keyboard = {
           break;
 
         case 'lang':
-          keyElement.classList.add('btn__wide');
+          keyElement.classList.add('btn__wide_second');
           keyElement.innerHTML = createIconHTML('lang');
           keyElement.classList.remove(`Key${keyUp}`);
           keyElement.classList.add('language');
@@ -273,7 +273,7 @@ const Keyboard = {
           break;
 
         case 'control':
-          keyElement.classList.add('btn__wide');
+          keyElement.classList.add('btn__wide_second');
           keyElement.innerHTML = createIconHTML('control');
           keyElement.classList.remove(`Key${keyUp}`);
           keyElement.classList.add('ControlLeft');
@@ -299,7 +299,7 @@ const Keyboard = {
           break;
 
         case 'command':
-          keyElement.classList.add('btn__wide');
+          keyElement.classList.add('btn__wide_second');
           keyElement.innerHTML = createIconHTML('command');
           keyElement.classList.remove(`Key${keyUp}`);
           keyElement.classList.add('MetaLeft');
@@ -312,7 +312,7 @@ const Keyboard = {
           break;
 
         case 'command_right':
-          keyElement.classList.add('btn__wide');
+          keyElement.classList.add('btn__wide_second');
           keyElement.innerHTML = createIconHTML('command');
           keyElement.classList.remove(`Key${keyUp}`);
           keyElement.classList.add('MetaRight');
