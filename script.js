@@ -43,13 +43,9 @@ const Keyboard = {
     WRAPPER.appendChild(this.elements.main);
 
     const TEXT = document.createElement('div');
-    TEXT.textContent = 'Клавиатура создана в операционной системе MAC OS';
+    TEXT.textContent = 'Клавиатура создана в операционной системе MAC OS. Для переключения языка комбинация кнопка lang';
     TEXT.classList.add('text__description');
-    const SECONDTEXT = document.createElement('div');
-    SECONDTEXT.textContent = 'Для переключения языка комбинация кнопка lang';
-    SECONDTEXT.classList.add('text__description');
     WRAPPER.appendChild(TEXT);
-    WRAPPER.appendChild(SECONDTEXT);
 
     document.querySelectorAll('.use-keyboard-input').forEach((element) => {
       element.addEventListener('focus', () => {
@@ -553,6 +549,10 @@ const Keyboard = {
       localStorage.removeItem('lang');
       localStorage.setItem('lang', 'eng');
     }
+    Keyboard.elements.main.remove();
+    const del = document.querySelector('.text__description');
+    WRAPPER.removeChild(del);
+    Keyboard.init();
   },
 
   open(initialValue, oninput, onclose) {
