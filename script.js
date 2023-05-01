@@ -146,7 +146,7 @@ const Keyboard = {
           keyElement.append(SPAN_UP);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '\n';
+            this.properties.value += '▲';
             this.triggerEvent('oninput');
           });
 
@@ -160,7 +160,7 @@ const Keyboard = {
           keyElement.append(SPAN_LEFT);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '◄';
             this.triggerEvent('oninput');
           });
 
@@ -174,7 +174,7 @@ const Keyboard = {
           keyElement.append(SPAN_DOWN);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '▼';
             this.triggerEvent('oninput');
           });
 
@@ -188,7 +188,7 @@ const Keyboard = {
           keyElement.append(SPAN_RIGHT);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '►';
             this.triggerEvent('oninput');
           });
 
