@@ -375,6 +375,7 @@ const Keyboard = {
         } else if (count === 'ShiftRight') {
           document.querySelector('.ShiftRight').classList.add('active');
         } else if (count === 'Tab') {
+          Keyboard.properties.value += '  ';
           document.querySelector('.Tab').classList.add('active');
         } else if (count === 'Space') {
           Keyboard.properties.value += ' ';
@@ -436,6 +437,11 @@ const Keyboard = {
         TEXTFIELD.selectionStart = Keyboard.properties.value.length;
         TEXTFIELD.selectionEnd = Keyboard.properties.value.length;
         document.querySelector(`.${event.code}`).classList.remove('active');
+        if (event.code === 'CapsLock') {
+          Keyboard.toggleCapsLock();
+          const caps = document.querySelector('.CapsLock');
+          caps.classList.toggle('btn--active', Keyboard.properties.capsLock);
+        }
       };
 
       fragment.appendChild(keyElement);
