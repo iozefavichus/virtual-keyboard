@@ -343,11 +343,8 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             // eslint-disable-next-line max-len
             this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-            this.triggerEvent('oninput');
+            Keyboard.triggerEvent('oninput');
           });
-          TEXTFIELD.focus();
-          TEXTFIELD.selectionStart = this.properties.value.length;
-          TEXTFIELD.selectionEnd = this.properties.value.length;
           break;
       }
 
