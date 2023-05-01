@@ -146,7 +146,7 @@ const Keyboard = {
           keyElement.append(SPAN_UP);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '\n';
+            this.properties.value += '▲';
             this.triggerEvent('oninput');
           });
 
@@ -160,7 +160,7 @@ const Keyboard = {
           keyElement.append(SPAN_LEFT);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '◄';
             this.triggerEvent('oninput');
           });
 
@@ -174,7 +174,7 @@ const Keyboard = {
           keyElement.append(SPAN_DOWN);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '▼';
             this.triggerEvent('oninput');
           });
 
@@ -188,7 +188,7 @@ const Keyboard = {
           keyElement.append(SPAN_RIGHT);
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += '';
+            this.properties.value += '►';
             this.triggerEvent('oninput');
           });
 
@@ -343,11 +343,8 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             // eslint-disable-next-line max-len
             this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-            this.triggerEvent('oninput');
+            Keyboard.triggerEvent('oninput');
           });
-          TEXTFIELD.focus();
-          TEXTFIELD.selectionStart = this.properties.value.length;
-          TEXTFIELD.selectionEnd = this.properties.value.length;
           break;
       }
 
@@ -362,110 +359,54 @@ const Keyboard = {
         if ((arrayDigit.includes(count)) || (arrayKey.includes(count))) {
           document.querySelector(`.${count}`).classList.add('active');
           Keyboard.properties.value += event.key;
-          setTimeout(() => {
-            document.querySelector(`.${count}`).classList.remove('active');
-          }, '150');
         } else if (count === 'Backspace') {
           document.querySelector('.Backspace').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Backspace').classList.remove('active');
-          }, '150');
         } else if (count === 'ControlLeft') {
           document.querySelector('.ControlLeft').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ControlLeft').classList.remove('active');
-          }, '150');
         } else if (count === 'MetaRight') {
           document.querySelector('.MetaRight').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.MetaRight').classList.remove('active');
-          }, '150');
         } else if (count === 'ShiftLeft') {
           document.querySelector('.ShiftLeft').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ShiftLeft').classList.remove('active');
-          }, '150');
         } else if (count === 'MetaLeft') {
           document.querySelector('.MetaLeft').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.MetaLeft').classList.remove('active');
-          }, '150');
         } else if (count === 'ShiftRight') {
           document.querySelector('.ShiftRight').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ShiftRight').classList.remove('active');
-          }, '150');
         } else if (count === 'Tab') {
+          Keyboard.properties.value += '  ';
           document.querySelector('.Tab').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Tab').classList.remove('active');
-          }, '150');
         } else if (count === 'Space') {
           Keyboard.properties.value += ' ';
           document.querySelector('.Space').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Space').classList.remove('active');
-          }, '150');
         } else if (count === 'Enter') {
           Keyboard.properties.value += '\n';
           document.querySelector('.Enter').classList.add('active');
-          setTimeout(() => {
-            document.querySelector(`.${count}`).classList.remove('active');
-          }, '150');
         } else if (count === 'IntlBackslash') {
           Keyboard.properties.value += '`';
           document.querySelector('.IntlBackslash').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.IntlBackslash').classList.remove('active');
-          }, '150');
         } else if (count === 'Comma') {
           Keyboard.properties.value += ',';
           document.querySelector('.Comma').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Comma').classList.remove('active');
-          }, '150');
         } else if (count === 'Period') {
           Keyboard.properties.value += '.';
           document.querySelector('.Period').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Period').classList.remove('active');
-          }, '150');
         } else if (count === 'Slash') {
           Keyboard.properties.value += '/';
           document.querySelector('.Slash').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Slash').classList.remove('active');
-          }, '150');
         } else if (count === 'Semicolon') {
           Keyboard.properties.value += ';';
           document.querySelector('.Semicolon').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Semicolon').classList.remove('active');
-          }, '150');
         } else if (count === 'Quote') {
           Keyboard.properties.value += "'";
           document.querySelector('.Quote').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Quote').classList.remove('active');
-          }, '150');
         } else if (count === 'Backslash') {
           Keyboard.properties.value += '';
           document.querySelector('.Backslash').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Backslash').classList.remove('active');
-          }, '150');
         } else if (count === 'BracketLeft') {
           Keyboard.properties.value += '[';
           document.querySelector('.BracketLeft').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.BracketLeft').classList.remove('active');
-          }, '150');
         } else if (count === 'BracketRight') {
           Keyboard.properties.value += ']';
           document.querySelector('.BracketRight').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.BracketRight').classList.remove('active');
-          }, '150');
         } else if (count === 'CapsLock') {
           Keyboard.toggleCapsLock();
           const caps = document.querySelector('.CapsLock');
@@ -474,42 +415,30 @@ const Keyboard = {
         } else if (count === 'Minus') {
           Keyboard.properties.value += '-';
           document.querySelector('.Minus').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Minus').classList.remove('active');
-          }, '150');
         } else if (count === 'Equal') {
           Keyboard.properties.value += '=';
           document.querySelector('.Equal').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.Equal').classList.remove('active');
-          }, '150');
         } else if (count === 'ArrowUp') {
           document.querySelector('.ArrowUp').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ArrowUp').classList.remove('active');
-          }, '150');
         } else if (count === 'ArrowDown') {
           document.querySelector('.ArrowDown').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ArrowDown').classList.remove('active');
-          }, '150');
         } else if (count === 'ArrowLeft') {
           document.querySelector('.ArrowLeft').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ArrowLeft').classList.remove('active');
-          }, '150');
         } else if (count === 'ArrowRight') {
           document.querySelector('.ArrowRight').classList.add('active');
-          setTimeout(() => {
-            document.querySelector('.ArrowRight').classList.remove('active');
-          }, '150');
         }
       };
       // eslint-disable-next-line func-names
-      document.onkeyup = function () {
+      document.onkeyup = function (event) {
         TEXTFIELD.focus();
-        TEXTFIELD.selectionStart = this.properties.value.length;
-        TEXTFIELD.selectionEnd = this.properties.value.length;
+        TEXTFIELD.selectionStart = Keyboard.properties.value.length;
+        TEXTFIELD.selectionEnd = Keyboard.properties.value.length;
+        document.querySelector(`.${event.code}`).classList.remove('active');
+        if (event.code === 'CapsLock') {
+          Keyboard.toggleCapsLock();
+          const caps = document.querySelector('.CapsLock');
+          caps.classList.toggle('btn--active', Keyboard.properties.capsLock);
+        }
       };
 
       fragment.appendChild(keyElement);
